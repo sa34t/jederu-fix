@@ -15,7 +15,7 @@ ding = True
 
 def load_yaml(file):
     with open(file, "r") as fileding:
-        data = yaml.load(fileding)
+        data = yaml.load(fileding, Loader=yaml.SafeLoader)  # Added the SafeLoader
     return data
 
 def dump_yaml(data, file):
@@ -60,7 +60,6 @@ def start():
     subprocess.Popen("python3 bot/index.py", shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
     return "<meta http-equiv='refresh' content='0; url=/' />"
 
-
 @app.route("/stop", methods=["POST"])
 def stop():
     subprocess.call("pkill -f index.py", shell=True)
@@ -76,7 +75,6 @@ def upload():
         return "<meta http-equiv='refresh' content='0; url=/' />"
     else:
         return "<meta http-equiv='refresh' content='0; url=/' />"
-
 
 @app.route("/profiel")
 @app.route("/profiel/<naam>")
